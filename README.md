@@ -1,6 +1,6 @@
 # Computer networks final project
 
-Secure messaging applications like WhatsApp and Telegram have become ubiquitous for personal and group communications. These apps provide end-to-end encryption to protect message contents from prying eyes. However, some metadata such as who is talking to whom and when is still potentially vulnerable to surveillance through traffic analysis.
+Secure messaging applications like WhatsApp and Telegram have become common for personal and group communications. These apps provide end-to-end encryption to protect message contents from prying eyes. However, some metadata such as who is talking to whom and when is still potentially vulnerable to surveillance through traffic analysis.
 
 This project explores whether traffic patterns alone can reveal insights into a user's group memberships and messaging habits, even when the messages themselves are encrypted. Prior academic work has shown some success in attributing encrypted traffic to destination services and contacts by analyzing traffic timing, size patterns, and more. We aim to recreate and expand on some of these techniques through a practical messaging app traffic analysis.
 
@@ -14,7 +14,7 @@ Our experiments tested scenarios where the target user is a member of only a sin
 The full methodology, results, and discussion are documented in the project report (report.pdf). The Python analysis scripts, sample captures, and output graphs are also provided in this repository.
 
 Contents
-* src: Contains the source code for traffic capturing, analysis, and attack simulations.
+* src: Contains the source code for traffic capturing, analysis.
 * resources: Contains sample pcap files of messaging app traffic.
 * results: Output logs, graphs, and other result files from traffic analysis and attacks.
 * report.pdf: Project report with answers to the dry part questions.
