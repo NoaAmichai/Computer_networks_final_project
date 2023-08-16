@@ -65,7 +65,7 @@ In summary, in controlled isolated conditions, each media type produces its own 
 
 
 ***References***
-* GitHub/Computer_networks_final_project/project-paper.pdf
+* [GitHub/Computer_networks_final_project/project-paper.pdf](http://localhost:8888/lab/tree/RTC%3AGitHub/Computer_networks_final_project/project-paper.pdf)http://localhost:8888/lab/tree/RTC%3AGitHub/Computer_networks_final_project/project-paper.pdf
 
 ***Submitted by***
 * Avi Ostroff
