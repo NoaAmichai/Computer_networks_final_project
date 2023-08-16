@@ -64,7 +64,7 @@ In summary, in controlled isolated conditions, each media type produces its own 
 
 
 
-***References***
+***References*** <br>
 * [Paper: Traffic Analysis of WhatsApp for Session Detection](https://www.ndss-symposium.org/wp-content/uploads/2020/02/24347-paper.pdf)
 
 ***Submitted by***
