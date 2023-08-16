@@ -55,6 +55,35 @@ Now that preprocessing is complete, we can move on to analyzing the timing, size
 ***Insights***<br><br>
 Our experiments revealed several noteworthy findings regarding WhatsApp web traffic analysis:
 
+Statistics for Pictures Data:
++--------+-------+-------------------+-------------------+-------+-------+-------+--------+--------+
+|        | count |       mean        |        std        |  min  |  25%  |  50%  |  75%   |  max   |
++--------+-------+-------------------+-------------------+-------+-------+-------+--------+--------+
+| Length | 85.0  | 617.2235294117647 | 616.7271407246827 | 152.0 | 160.0 | 229.0 | 1304.0 | 2022.0 |
++--------+-------+-------------------+-------------------+-------+-------+-------+--------+--------+
+
+Statistics for Voice Data:
++--------+-------+--------------------+-------------------+-------+-------+-------+-------+--------+
+|        | count |        mean        |        std        |  min  |  25%  |  50%  |  75%  |  max   |
++--------+-------+--------------------+-------------------+-------+-------+-------+-------+--------+
+| Length | 105.0 | 379.45714285714286 | 313.9607713299003 | 151.0 | 159.0 | 181.0 | 552.0 | 1112.0 |
++--------+-------+--------------------+-------------------+-------+-------+-------+-------+--------+
+
+Statistics for Video Data:
++--------+-------+-------------------+-------------------+-------+-------+-------+--------+--------+
+|        | count |       mean        |        std        |  min  |  25%  |  50%  |  75%   |  max   |
++--------+-------+-------------------+-------------------+-------+-------+-------+--------+--------+
+| Length | 157.0 | 899.6496815286624 | 998.9877496376921 | 112.0 | 159.0 | 363.0 | 1436.0 | 2848.0 |
++--------+-------+-------------------+-------------------+-------+-------+-------+--------+--------+
+
+Statistics for Text Data:
++--------+-------+-------------------+-------------------+-------+-------+-------+-------+--------+
+|        | count |       mean        |        std        |  min  |  25%  |  50%  |  75%  |  max   |
++--------+-------+-------------------+-------------------+-------+-------+-------+-------+--------+
+| Length | 181.0 | 336.7790055248619 | 315.8811763255027 | 112.0 | 181.0 | 236.0 | 371.0 | 2848.0 |
++--------+-------+-------------------+-------------------+-------+-------+-------+-------+--------+
+
+
 1. When isolating a single message type in an individual group, we were able to derive clear and consistent packet timing and size fingerprints for each media type through controlled testing. For example, text messages reliably formed clusters of small packets around 200 bytes in length transmitted in rapid dense bursts at sub-second intervals. Image messages on the other hand resulted in sparse large packet clusters averaging 2000 bytes but with wider gaps on the order of seconds between each message. We also characterized audio packets as medium sized falling between text and images with dense frequency, and video packets as large over 1500 bytes clustered at frame intervals. By profiling known isolated groups, we built up unique signatures to identify each data type based on its distinct transmission behavior.
 2. Using cross-correlation of traffic patterns, we showed it is possible to detect whether a user belongs to a target group even in the presence of background noise. Despite introducing heavy random packet noise from music streaming, we were still able to reliably match the timing and density clusters from the target group's messaging traffic to the user under analysis based on the clustered fingerprints. This demonstrates correlation techniques can be robust even in realistic noisy environments. The added random packets degraded signal quality but did not prevent association.
 3. We found that transmitting related packets in dense batches led to clear visually identifiable blocking patterns. Sequential images or text messages when sent in rapid succession formed obvious "blocky" structures in the traffic visualizations due to their cluster density. This makes the inherent data fingerprints much more pronounced for quick human recognition as well as straightforward programmatic analysis by amplifying the signals above noise. Simple thresholded blob detection could pick out these traffic blocks.
