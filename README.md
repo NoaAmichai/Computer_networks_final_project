@@ -37,18 +37,18 @@ By following these steps, you'll be able to easily run the code, visualize the o
 The raw packet capture contains many extraneous packets unrelated to the WhatsApp web traffic we aim to analyze. To isolate the relevant WhatsApp packets, we filter the data as a preprocessing step.
 
 Specifically, we filter the packets to only keep those with TCP port 443. This port is used for HTTPS encrypted traffic. Since WhatsApp communications are encrypted between the client and WhatsApp's servers, the WhatsApp web packets are transmitted over port 443.
-By removing the extraneous non-443 packets, we are left with a clean subset of the traffic that contains only the WhatsApp web communications we intend to study. This filtered data can then be analyzed to extract information specifically about the WhatsApp usage without interference from unrelated packets.
+By removing the extraneous non-443 packets, we are left with a cleaner subset of the traffic that contains the communications we intend to study. This filtered data can then be analyzed to extract information specifically about the WhatsApp usage without interference from unrelated packets.
 
 After filtering the packets by port 443, we applied an additional filter to only keep packets with the TLS protocol. TLS (Transport Layer Security) is used to encrypt the actual WhatsApp payload data.
-The raw capture contains other TCP packets like ACKs, push requests, etc that are part of the TCP handshake and transmission but do not contain the WhatsApp messaging content. By further filtering down to just TLS packets, we isolated the encrypted WhatsApp data being sent and received.
-This two-step filtering approach of first selecting port 443 and then choosing TLS packets gives us only the TLS-encrypted WhatsApp data, removing all other extraneous packets. This filtered subset contains the core information we want to analyze regarding the WhatsApp web session.
+The raw capture contains other TCP packets like ACKs, push requests, etc that are part of the TCP handshake and transmission but do not contain the WhatsApp messaging content. By further filtering down to just TLS packets, we isolated the encrypted data being sent and received.
+This two-step filtering approach of first selecting port 443 and then choosing TLS packets gives us only the TLS-encrypted data(that Whatsapp uses), removing all other extraneous packets.
 
 After filtering by port and protocol, we filtered the packets further based on the source and destination IP addresses.
 To get the server IP, we used `nslookup` on the WhatsApp web domain. This gave us the IP address of the WhatsApp server we were communicating with.
-For the client IP, we used `ifconfig` on our machine to get our local IP address.
-Using these two IP addresses, we filtered the packet capture to only keep packets going between our computer and the WhatsApp server. This removed any other extraneous traffic in the capture.
+We found the Attacked users IP(we used `ifconfig` but in real life you will have to use other methods as you might not have access to the Attacked user's computer).
+Using these two IP addresses, we filtered the packet capture to only keep packets going between the attacked user and the WhatsApp server. This removed any other extraneous traffic in the capture and left us with only Whatsapp data.This filtered subset contains the core information we want to analyze regarding the WhatsApp web session.
 
-At this point, the filtered dataset contains only the WhatsApp web packets sent between our client and the server. However, there may still be some noise from other WhatsApp groups being captured.
+At this point, the filtered dataset contains only the WhatsApp web packets sent between the attacked user and the server. However, there may still be some noise from other WhatsApp groups being captured.
 Overall, the multi-stage filtering process resulted in a clean subset of packets relevant to our analysis. By removing unnecessary packets, we are left with only the WhatsApp web traffic to study further.
 Now that preprocessing is complete, we can move on to analyzing the timing, size patterns, and other characteristics of this filtered WhatsApp packet data.
 
@@ -60,7 +60,7 @@ Our experiments revealed several noteworthy findings regarding WhatsApp web traf
 3. We found that transmitting related packets in dense batches led to clear visually identifiable blocking patterns. Sequential images or text messages when sent in rapid succession formed obvious "blocky" structures in the traffic visualizations due to their cluster density. This makes the inherent data fingerprints much more pronounced for quick human recognition as well as straightforward programmatic analysis by amplifying the signals above noise. Simple thresholded blob detection could pick out these traffic blocks.
 4. Accurately identifying user presence in mixed groups with interleaved data types proved more challenging as expected. The randomness of multiple media types blending together disrupts the clear shapes and visible blocks described earlier. However, in certain cases like text messaging, even in mixed groups we were able to observe some residual distinctive patterns in batched transmissions that could help identify shapes amidst heavier noise. But in general, mixed groups call for more advanced analytics like ML classification on extracted features to correlate users.<br>
 
-In summary, in controlled isolated conditions, each media type produces its own identifiable signature while background noise sources and mixed traffic degrade detection accuracy by obscuring the characteristic patterns. Clustering related packets together strengthens the observable fingerprint to enable high confidence traffic cross-correlation between a known group and user under analysis, even in non-ideal noisy conditions.
+In summary, in controlled isolated conditions, each media type produces its own identifiable signature while background noise sources and mixed traffic degrade detection accuracy by obscuring the characteristic patterns. Clustering related packets together strengthens the observable fingerprint to enable high confidence traffic cross-correlation between a known group and user under analysis, even in non-ideal noisy conditions.However clustering is not something that will always occur in real life situations.
 
 
 
