@@ -52,7 +52,7 @@ At this point, the filtered dataset contains only the WhatsApp web packets sent 
 Overall, the multi-stage filtering process resulted in a clean subset of packets relevant to our analysis. By removing unnecessary packets, we are left with only the WhatsApp web traffic to study further.
 Now that preprocessing is complete, we can move on to analyzing the timing, size patterns, and other characteristics of this filtered WhatsApp packet data.
 
-***Insights***
+***Insights***<br><br>
 Our experiments revealed several noteworthy findings regarding WhatsApp web traffic analysis:
 
 1. When isolating a single message type in an individual group, we were able to derive clear and consistent packet timing and size fingerprints for each media type through controlled testing. For example, text messages reliably formed clusters of small packets around 200 bytes in length transmitted in rapid dense bursts at sub-second intervals. Image messages on the other hand resulted in sparse large packet clusters averaging 2000 bytes but with wider gaps on the order of seconds between each message. We also characterized audio packets as medium sized falling between text and images with dense frequency, and video packets as large over 1500 bytes clustered at frame intervals. By profiling known isolated groups, we built up unique signatures to identify each data type based on its distinct transmission behavior.
