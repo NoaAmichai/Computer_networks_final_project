@@ -1,12 +1,12 @@
 # Computer networks final project
 
-Introduction:
+***Introduction:*** 
 
 Secure messaging applications like WhatsApp and Telegram have become common for personal and group communications. These apps provide end-to-end encryption to protect message contents from prying eyes. However, some metadata such as who is talking to whom and when is still potentially vulnerable to surveillance through traffic analysis.
 
 This project explores whether traffic patterns alone can reveal insights into a user's group memberships and messaging habits, even when the messages themselves are encrypted. Prior academic work has shown some success in attributing encrypted traffic to destination services and contacts by analyzing traffic timing, size patterns, and more. We aim to recreate and expand on some of these techniques through a practical messaging app traffic analysis.
 
-Our Approach <br>
+***Our Approach*** <br>
 We focused our analysis on WhatsApp due to its popularity and encrypted protocol. Actual WhatsApp Web traffic from multiple test groups was captured using Wireshark packet sniffing. This traffic was then processed using custom Python scripts to extract attributes like inter-message timing and message sizes.
 
 Visualizations of these traffic patterns were generated for each group. We looked for unique characteristics in the timing and size graphs that could serve as fingerprints to identify a specific group. Beyond simple visualization, we implemented algorithms from an academic paper on traffic analysis attacks on messaging apps. These techniques attempt to correlate timing and size patterns across users to deduce group membership.
@@ -16,7 +16,7 @@ Our experiments tested scenarios where the target user is a member of only a sin
 The full methodology, results, and discussion are documented in the project report (report.pdf). The Python analysis scripts, sample captures, and output graphs are also provided in this repository.
 
 
-To execute the code, follow these steps:
+***To execute the code, follow these steps:***
 1. Begin by cloning the repository to your local machine.
 2. Navigate to the "src" folder within the cloned repository.
 3. Inside the "src" folder, locate the notebook you want to run.
@@ -26,14 +26,14 @@ To execute the code, follow these steps:
 By following these steps, you'll be able to easily run the code, visualize the outcomes, and access the graphs and images produced during the execution of the notebook.
 
 
-Contents
+***Contents***
 * src: Contains the source code for traffic capturing, analysis.
 * resources: Contains sample pcap files of messaging app traffic.
 * results: Output graphs, and other result files from traffic analysis and attacks.
 * report.pdf: Project report with answers to the dry part questions.
   
 
-Cleaning Process<br>
+***Cleaning Process***<br><br>
 The raw packet capture contains many extraneous packets unrelated to the WhatsApp web traffic we aim to analyze. To isolate the relevant WhatsApp packets, we filter the data as a preprocessing step.
 
 Specifically, we filter the packets to only keep those with TCP port 443. This port is used for HTTPS encrypted traffic. Since WhatsApp communications are encrypted between the client and WhatsApp's servers, the WhatsApp web packets are transmitted over port 443.
@@ -52,14 +52,14 @@ At this point, the filtered dataset contains only the WhatsApp web packets sent 
 Overall, the multi-stage filtering process resulted in a clean subset of packets relevant to our analysis. By removing unnecessary packets, we are left with only the WhatsApp web traffic to study further.
 Now that preprocessing is complete, we can move on to analyzing the timing, size patterns, and other characteristics of this filtered WhatsApp packet data.
 
-Insights
+***Insights***
 
 
 
 
-References
+***References***
 * GitHub/Computer_networks_final_project/project-paper.pdf
 
-Submitted by
+***Submitted by***
 * Avi Ostroff
 * Noa Amichai 
